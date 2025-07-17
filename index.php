@@ -700,72 +700,654 @@
         
         /* Booking Form */
         .booking-section {
-            background: #333;
+            background: linear-gradient(135deg, #333 0%, #2c3e50 100%);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: bookingFloat 25s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes bookingFloat {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .booking-section h2 {
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 2px;
         }
         
         .booking-form {
             background: white;
             color: #333;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 600px;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 700px;
             margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .booking-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            transition: left 0.5s;
+        }
+        
+        .booking-form:hover::before {
+            left: 100%;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            position: relative;
+            margin-bottom: 2.5rem;
         }
         
         .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            color: #999;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-weight: 500;
+            z-index: 1;
+            transform-origin: left center;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 1.2rem 0 0.5rem;
+            border: none;
+            border-bottom: 2px solid #e0e0e0;
+            background: transparent;
             font-size: 1rem;
+            color: #333;
+            transition: all 0.3s ease;
+            outline: none;
+            position: relative;
+            z-index: 2;
+            box-sizing: border-box;
+        }
+        
+        .form-group input[type="date"] {
+            color: transparent;
+            padding-right: 2rem;
+        }
+        
+        .form-group input[type="date"]:focus,
+        .form-group input[type="date"]:valid,
+        .form-group input[type="date"]::-webkit-datetime-edit {
+            color: #333;
+        }
+        
+        .form-group input:focus + label,
+        .form-group input:valid + label,
+        .form-group input[type="date"]:focus + label,
+        .form-group input[type="date"]:not([value=""]) + label,
+        .form-group select:focus + label,
+        .form-group select:valid + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:valid + label {
+            top: -0.5rem;
+            font-size: 0.8rem;
+            color: #d4af37;
+            font-weight: 600;
+            transform: translateY(0);
+        }
+        
+        /* Ensure labels float properly for filled inputs */
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:not([value=""]) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            font-size: 0.8rem;
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        /* Special handling for date inputs */
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .form-group input[type="date"]:hover::-webkit-calendar-picker-indicator {
+            opacity: 1;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-bottom-color: #d4af37;
+        }
+        
+        .form-highlight {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            transition: width 0.3s ease;
+        }
+        
+        .form-group input:focus ~ .form-highlight,
+        .form-group select:focus ~ .form-highlight,
+        .form-group textarea:focus ~ .form-highlight {
+            width: 100%;
+        }
+        
+        .form-group select {
+            cursor: pointer;
+        }
+        
+        .form-group select option {
+            background: white;
+            color: #333;
+            padding: 0.5rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
         }
         
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
-        .contact-info {
+        .booking-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 2rem;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .booking-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+        
+        .booking-submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .booking-submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .booking-submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            animation: contactFloat 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes contactFloat {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .contact-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 2px;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .contact-card {
             background: white;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .contact-info h3 {
-            color: #d4af37;
-            margin-bottom: 1rem;
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s;
         }
         
-        .map-placeholder {
-            background: #e9ecef;
-            height: 300px;
-            border-radius: 10px;
+        .contact-card:hover::before {
+            left: 100%;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .contact-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .contact-card p {
             color: #666;
+            line-height: 1.6;
+        }
+        
+        .contact-form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .contact-form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .stylish-contact-form {
+            position: relative;
+        }
+        
+        .form-group-modern {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group-modern input,
+        .form-group-modern select,
+        .form-group-modern textarea {
+            width: 100%;
+            padding: 1rem 0 0.5rem;
+            border: none;
+            border-bottom: 2px solid #e0e0e0;
+            background: transparent;
+            font-size: 1rem;
+            color: #333;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .form-group-modern label {
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            color: #999;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .form-group-modern input:focus + label,
+        .form-group-modern input:valid + label,
+        .form-group-modern select:focus + label,
+        .form-group-modern select:valid + label,
+        .form-group-modern textarea:focus + label,
+        .form-group-modern textarea:valid + label {
+            top: -0.5rem;
+            font-size: 0.8rem;
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        .form-highlight {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            transition: width 0.3s ease;
+        }
+        
+        .form-group-modern input:focus ~ .form-highlight,
+        .form-group-modern select:focus ~ .form-highlight,
+        .form-group-modern textarea:focus ~ .form-highlight {
+            width: 100%;
+        }
+        
+        .form-group-modern select {
+            cursor: pointer;
+        }
+        
+        .form-group-modern select option {
+            background: white;
+            color: #333;
+        }
+        
+        .textarea-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .contact-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .contact-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .contact-submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .map-container {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .map-placeholder-modern {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-overlay {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .map-overlay h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .map-overlay p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .map-pin {
+            animation: mapPing 2s infinite;
+        }
+        
+        @keyframes mapPing {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .testimonials-section {
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .testimonials-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .testimonials-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 2px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quote-icon {
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        .testimonial-content p {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .author-info {
+            text-align: left;
+        }
+        
+        .author-info h5 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .author-info span {
+            color: #999;
+            font-size: 0.9rem;
         }
         
         /* Footer */
@@ -782,12 +1364,298 @@
                 display: none;
             }
             
+            nav {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                height: 100vh;
+                background-attachment: scroll;
+                padding: 0 1rem;
+            }
+            
+            .hero-content {
+                padding: 2rem 1rem;
+            }
+            
             .hero-content h1 {
                 font-size: 2.5rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 1px;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                line-height: 1.6;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                padding: 1rem 2rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .room-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .room-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .contact-info-cards {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .contact-form-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .form-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-title {
+                font-size: 2.2rem;
+            }
+            
+            .testimonials-title {
+                font-size: 2rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .form-group {
+                margin-bottom: 2rem;
+            }
+            
+            .form-group label {
+                font-size: 0.9rem;
+                top: 1.1rem;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 1.3rem 0 0.6rem;
+            }
+            
+            .form-group input[type="date"] {
+                padding-right: 2.5rem;
+            }
+            
+            .form-group input:focus + label,
+            .form-group input:valid + label,
+            .form-group input[type="date"]:focus + label,
+            .form-group input[type="date"]:not([value=""]) + label,
+            .form-group select:focus + label,
+            .form-group select:valid + label,
+            .form-group textarea:focus + label,
+            .form-group textarea:valid + label {
+                top: -0.3rem;
+                font-size: 0.75rem;
+            }
+            
+            .form-group input:not(:placeholder-shown) + label,
+            .form-group select:not([value=""]) + label,
+            .form-group textarea:not(:placeholder-shown) + label {
+                top: -0.3rem;
+                font-size: 0.75rem;
+            }
+            
+            .booking-form {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                max-height: 85vh;
+            }
+            
+            .modal-body {
+                padding: 0 1rem 1rem;
+            }
+            
+            .modal-room-title {
+                font-size: 2rem;
+            }
+            
+            .modal-features-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .modal-book-btn,
+            .modal-contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .floating-elements::before,
+            .floating-elements::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.9rem 1.5rem;
+            }
+            
+            .section {
+                padding: 2rem 0.5rem;
+            }
+            
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .room-details h4 {
+                font-size: 1.1rem;
+            }
+            
+            .price-amount {
+                font-size: 1.3rem;
+            }
+            
+            .booking-form {
+                padding: 1rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1.8rem;
+            }
+            
+            .form-group label {
+                font-size: 0.85rem;
+                top: 1.2rem;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 1.4rem 0 0.7rem;
+                font-size: 16px;
+            }
+            
+            .form-group input[type="date"] {
+                padding-right: 3rem;
+            }
+            
+            .form-group input:focus + label,
+            .form-group input:valid + label,
+            .form-group input[type="date"]:focus + label,
+            .form-group input[type="date"]:not([value=""]) + label,
+            .form-group select:focus + label,
+            .form-group select:valid + label,
+            .form-group textarea:focus + label,
+            .form-group textarea:valid + label {
+                top: -0.2rem;
+                font-size: 0.7rem;
+            }
+            
+            .form-group input:not(:placeholder-shown) + label,
+            .form-group select:not([value=""]) + label,
+            .form-group textarea:not(:placeholder-shown) + label {
+                top: -0.2rem;
+                font-size: 0.7rem;
+            }
+            
+            .modal-room-title {
+                font-size: 1.6rem;
+            }
+            
+            .modal-price-amount {
+                font-size: 2rem;
+            }
+            
+            .contact-info-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .contact-title {
+                font-size: 2rem;
+            }
+            
+            .testimonials-title {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -853,7 +1721,7 @@
             <div class="room-grid">
                 <div class="room-card" onclick="openRoomModal('deluxe-ocean')">
                     <div class="room-image">
-                        <img src="images/rooms/deluxe-room-1.jpg" alt="Deluxe Ocean View Room">
+                        <img src="images/rooms/deluxe_room_1.jpg" alt="Deluxe Ocean View Room">
                     </div>
                     <div class="room-details">
                         <h4>Deluxe Ocean View</h4>
@@ -876,7 +1744,7 @@
                 
                 <div class="room-card" onclick="openRoomModal('deluxe-garden')">
                     <div class="room-image">
-                        <img src="images/rooms/deluxe-room-2.jpg" alt="Deluxe Garden View Room">
+                        <img src="images/rooms/deluxe_room_2.jpg" alt="Deluxe Garden View Room">
                     </div>
                     <div class="room-details">
                         <h4>Deluxe Garden View</h4>
@@ -905,7 +1773,7 @@
             <div class="room-grid">
                 <div class="room-card" onclick="openRoomModal('presidential')">
                     <div class="room-image">
-                        <img src="images/rooms/suite-room.jpg" alt="Presidential Suite">
+                        <img src="images/rooms/suite_room.jpg" alt="Presidential Suite">
                     </div>
                     <div class="room-details">
                         <h4>Presidential Suite</h4>
@@ -928,7 +1796,7 @@
                 
                 <div class="room-card" onclick="openRoomModal('honeymoon')">
                     <div class="room-image">
-                        <img src="images/rooms/deluxe-room-1.jpg" alt="Honeymoon Suite">
+                        <img src="images/rooms/suite_room_2.jpg" alt="Honeymoon Suite">
                     </div>
                     <div class="room-details">
                         <h4>Honeymoon Suite</h4>
@@ -958,61 +1826,69 @@
         <form class="booking-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="checkin">Check-in Date</label>
                     <input type="date" id="checkin" name="checkin" required>
+                    <label for="checkin">Check-in Date</label>
+                    <div class="form-highlight"></div>
                 </div>
                 <div class="form-group">
-                    <label for="checkout">Check-out Date</label>
                     <input type="date" id="checkout" name="checkout" required>
+                    <label for="checkout">Check-out Date</label>
+                    <div class="form-highlight"></div>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="guests">Number of Guests</label>
                     <select id="guests" name="guests" required>
-                        <option value="">Select guests</option>
+                        <option value="" disabled selected></option>
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
                         <option value="3">3 Guests</option>
                         <option value="4">4 Guests</option>
                     </select>
+                    <label for="guests">Number of Guests</label>
+                    <div class="form-highlight"></div>
                 </div>
                 <div class="form-group">
-                    <label for="room_type">Room Type</label>
                     <select id="room_type" name="room_type" required>
-                        <option value="">Select room type</option>
+                        <option value="" disabled selected></option>
                         <option value="deluxe_ocean">Deluxe Ocean View</option>
                         <option value="deluxe_garden">Deluxe Garden View</option>
                         <option value="presidential">Presidential Suite</option>
                         <option value="honeymoon">Honeymoon Suite</option>
                     </select>
+                    <label for="room_type">Room Type</label>
+                    <div class="form-highlight"></div>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
+                    <label for="name">Full Name</label>
+                    <div class="form-highlight"></div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
+                    <label for="email">Email Address</label>
+                    <div class="form-highlight"></div>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" required>
+                <label for="phone">Phone Number</label>
+                <div class="form-highlight"></div>
             </div>
             
             <div class="form-group">
-                <label for="special_requests">Special Requests or Add-ons</label>
                 <textarea id="special_requests" name="special_requests" rows="4" placeholder="Airport transfer, spa treatments, special dietary requirements, etc."></textarea>
+                <label for="special_requests">Special Requests or Add-ons</label>
+                <div class="form-highlight"></div>
             </div>
             
-            <button type="submit" name="submit_booking" class="cta-button" style="width: 100%;">
-                Book Now
+            <button type="submit" name="submit_booking" class="booking-submit-btn">
+                Book Your Stay Now
             </button>
         </form>
         
@@ -1133,42 +2009,182 @@ Please follow up with the guest within 24 hours.
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2>Contact Us</h2>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>Get in Touch</h3>
-                <p><strong>Address:</strong><br>
-                Lighthouse Beach Road<br>
-                Kovalam, Kerala 695527<br>
-                India</p>
+    <section id="contact" class="section contact-section">
+        <div class="contact-hero">
+            <h2 class="contact-title">Get in Touch</h2>
+            <p class="contact-subtitle">We're here to make your stay exceptional</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>Lighthouse Beach Road<br>
+                    Kovalam, Kerala 695527<br>
+                    India</p>
+                </div>
                 
-                <p><strong>Phone:</strong><br>
-                +91 471 248 0101<br>
-                +91 9876 543 210</p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>+91 471 248 0101<br>
+                    +91 9876 543 210</p>
+                </div>
                 
-                <p><strong>Email:</strong><br>
-                reservations@aurakovalam.com<br>
-                info@aurakovalam.com</p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>reservations@aurakovalam.com<br>
+                    info@aurakovalam.com</p>
+                </div>
                 
-                <p><strong>Check-in:</strong> 2:00 PM<br>
-                <strong>Check-out:</strong> 12:00 PM</p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3>Check-in Times</h3>
+                    <p>Check-in: 2:00 PM<br>
+                    Check-out: 12:00 PM</p>
+                </div>
             </div>
-            <div class="map-placeholder">
-                <p>Interactive Map<br>Lighthouse Beach, Kovalam</p>
+            
+            <div class="contact-form-section">
+                <div class="contact-form-container">
+                    <h3 class="form-title">Send us a Message</h3>
+                    <form class="stylish-contact-form">
+                        <div class="form-group-modern">
+                            <input type="text" id="contact_name" name="contact_name" required>
+                            <label for="contact_name">Your Name</label>
+                            <div class="form-highlight"></div>
+                        </div>
+                        
+                        <div class="form-group-modern">
+                            <input type="email" id="contact_email" name="contact_email" required>
+                            <label for="contact_email">Email Address</label>
+                            <div class="form-highlight"></div>
+                        </div>
+                        
+                        <div class="form-group-modern">
+                            <input type="tel" id="contact_phone" name="contact_phone" required>
+                            <label for="contact_phone">Phone Number</label>
+                            <div class="form-highlight"></div>
+                        </div>
+                        
+                        <div class="form-group-modern">
+                            <select id="contact_subject" name="contact_subject" required>
+                                <option value="" disabled selected></option>
+                                <option value="booking">Booking Inquiry</option>
+                                <option value="information">General Information</option>
+                                <option value="special_request">Special Request</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="contact_subject">Subject</label>
+                            <div class="form-highlight"></div>
+                        </div>
+                        
+                        <div class="form-group-modern textarea-group">
+                            <textarea id="contact_message" name="contact_message" rows="5" required></textarea>
+                            <label for="contact_message">Your Message</label>
+                            <div class="form-highlight"></div>
+                        </div>
+                        
+                        <button type="submit" class="contact-submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <div class="btn-loading">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="map-container">
+                    <div class="map-placeholder-modern">
+                        <div class="map-overlay">
+                            <h4>Find Us</h4>
+                            <p>Lighthouse Beach, Kovalam</p>
+                            <div class="map-pin">
+                                <svg width="32" height="32" fill="#d4af37" viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div style="margin-top: 3rem; background: #f8f9fa; padding: 2rem; border-radius: 10px;">
-            <h3 style="text-align: center; color: #d4af37; margin-bottom: 2rem;">Guest Testimonials</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <p style="font-style: italic; margin-bottom: 1rem;">"Absolutely stunning location with exceptional service. The ocean view from our deluxe room was breathtaking!"</p>
-                    <p style="font-weight: bold; color: #333;">- Sarah & John, UK</p>
+        <div class="testimonials-section">
+            <h3 class="testimonials-title">What Our Guests Say</h3>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" fill="#d4af37" viewBox="0 0 24 24">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        <p>"Absolutely stunning location with exceptional service. The ocean view from our deluxe room was breathtaking!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div class="author-info">
+                            <h5>Sarah & John</h5>
+                            <span>United Kingdom</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <p style="font-style: italic; margin-bottom: 1rem;">"Perfect honeymoon destination. The suite was luxurious and the staff made our stay unforgettable."</p>
-                    <p style="font-weight: bold; color: #333;">- Priya & Arjun, Mumbai</p>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" fill="#d4af37" viewBox="0 0 24 24">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        <p>"Perfect honeymoon destination. The suite was luxurious and the staff made our stay unforgettable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PA</div>
+                        <div class="author-info">
+                            <h5>Priya & Arjun</h5>
+                            <span>Mumbai, India</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <svg width="24" height="24" fill="#d4af37" viewBox="0 0 24 24">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        <p>"The attention to detail and personalized service exceeded all our expectations. Truly a 5-star experience!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h5>Michael & Rachel</h5>
+                            <span>California, USA</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1253,7 +2269,7 @@ Please follow up with the guest within 24 hours.
         // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
@@ -1261,6 +2277,7 @@ Please follow up with the guest within 24 hours.
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('animated');
                 }
             });
         }, observerOptions);
@@ -1268,24 +2285,126 @@ Please follow up with the guest within 24 hours.
         // Observe elements for animation
         document.addEventListener('DOMContentLoaded', function() {
             const animateElements = document.querySelectorAll('.feature-card, .room-card');
-            animateElements.forEach(el => {
+            animateElements.forEach((el, index) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.8s ease';
+                el.style.transition = `all 0.8s ease ${index * 0.2}s`;
                 observer.observe(el);
+                
+                // Fallback: show elements after 3 seconds if observer doesn't work
+                setTimeout(() => {
+                    if (!el.classList.contains('animated')) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }
+                }, 3000 + (index * 200));
             });
+            
+            // Additional fallback for mobile devices
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    animateElements.forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    });
+                }, 1000);
+            }
         });
 
         // Set minimum date for check-in to today
         const today = new Date().toISOString().split('T')[0];
-        document.getElementById('checkin').setAttribute('min', today);
+        const checkinInput = document.getElementById('checkin');
+        const checkoutInput = document.getElementById('checkout');
         
-        // Update check-out minimum date when check-in changes
-        document.getElementById('checkin').addEventListener('change', function() {
+        checkinInput.setAttribute('min', today);
+        
+        // Function to handle date input label positioning
+        function handleDateInputLabel(input) {
+            const label = input.nextElementSibling;
+            if (input.value) {
+                label.style.top = '-0.5rem';
+                label.style.fontSize = '0.8rem';
+                label.style.color = '#d4af37';
+                label.style.fontWeight = '600';
+                label.style.transform = 'translateY(0)';
+            } else {
+                label.style.top = '1rem';
+                label.style.fontSize = '1rem';
+                label.style.color = '#999';
+                label.style.fontWeight = '500';
+                label.style.transform = 'translateY(0)';
+            }
+        }
+        
+        // Function to handle all form inputs label positioning
+        function handleFormInputLabel(input) {
+            const label = input.nextElementSibling;
+            if (input.value || input.type === 'date') {
+                label.style.top = '-0.5rem';
+                label.style.fontSize = '0.8rem';
+                label.style.color = '#d4af37';
+                label.style.fontWeight = '600';
+            } else {
+                label.style.top = '1rem';
+                label.style.fontSize = '1rem';
+                label.style.color = '#999';
+                label.style.fontWeight = '500';
+            }
+        }
+        
+        // Handle check-in date changes
+        checkinInput.addEventListener('change', function() {
+            handleDateInputLabel(this);
             const checkinDate = new Date(this.value);
             checkinDate.setDate(checkinDate.getDate() + 1);
             const minCheckout = checkinDate.toISOString().split('T')[0];
-            document.getElementById('checkout').setAttribute('min', minCheckout);
+            checkoutInput.setAttribute('min', minCheckout);
+            
+            // Clear checkout if it's before new minimum
+            if (checkoutInput.value && checkoutInput.value < minCheckout) {
+                checkoutInput.value = '';
+                handleDateInputLabel(checkoutInput);
+            }
+        });
+        
+        // Handle check-out date changes
+        checkoutInput.addEventListener('change', function() {
+            handleDateInputLabel(this);
+        });
+        
+        // Handle focus events for better label positioning
+        checkinInput.addEventListener('focus', function() {
+            this.style.color = '#333';
+        });
+        
+        checkoutInput.addEventListener('focus', function() {
+            this.style.color = '#333';
+        });
+        
+        // Initialize label positions on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            handleDateInputLabel(checkinInput);
+            handleDateInputLabel(checkoutInput);
+            
+            // Initialize all form labels
+            const allFormInputs = document.querySelectorAll('.booking-form input, .booking-form select, .booking-form textarea');
+            allFormInputs.forEach(input => {
+                // Set initial label position
+                handleFormInputLabel(input);
+                
+                // Add event listeners for better label handling
+                input.addEventListener('input', function() {
+                    handleFormInputLabel(this);
+                });
+                
+                input.addEventListener('change', function() {
+                    handleFormInputLabel(this);
+                });
+                
+                input.addEventListener('blur', function() {
+                    handleFormInputLabel(this);
+                });
+            });
         });
 
         // Add loading animation
@@ -1303,7 +2422,7 @@ Please follow up with the guest within 24 hours.
                 title: 'Deluxe Ocean View',
                 subtitle: 'Spacious 350 sq ft room with panoramic ocean views and modern amenities',
                 price: '₹8,500',
-                image: 'images/rooms/deluxe-room-1.jpg',
+                image: 'images/rooms/deluxe_room_1.jpg',
                 features: [
                     'King-size bed with premium linens',
                     'Private balcony with ocean view',
@@ -1329,7 +2448,7 @@ Please follow up with the guest within 24 hours.
                 title: 'Deluxe Garden View',
                 subtitle: 'Comfortable 320 sq ft room overlooking lush tropical gardens',
                 price: '₹7,200',
-                image: 'images/rooms/deluxe-room-2.jpg',
+                image: 'images/rooms/deluxe_room_2.jpg',
                 features: [
                     'Queen-size bed with luxury bedding',
                     'Garden view balcony',
@@ -1355,7 +2474,7 @@ Please follow up with the guest within 24 hours.
                 title: 'Presidential Suite',
                 subtitle: 'Magnificent 800 sq ft suite with separate living area and premium ocean views',
                 price: '₹18,000',
-                image: 'images/rooms/suite-room.jpg',
+                image: 'images/rooms/suite_room.jpg',
                 features: [
                     'Master bedroom with king-size bed',
                     'Separate living room with sofa',
@@ -1381,7 +2500,7 @@ Please follow up with the guest within 24 hours.
                 title: 'Honeymoon Suite',
                 subtitle: 'Romantic 600 sq ft suite perfect for couples with special amenities',
                 price: '₹15,500',
-                image: 'images/rooms/deluxe-room-1.jpg',
+                image: 'images/rooms/suite_room_2.jpg',
                 features: [
                     'King-size canopy bed',
                     'Romantic decor and lighting',
