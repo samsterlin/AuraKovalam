@@ -853,7 +853,7 @@
             <div class="room-grid">
                 <div class="room-card" onclick="openRoomModal('deluxe-ocean')">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Ocean View Room">
+                        <img src="images/rooms/deluxe-room-1.jpg" alt="Deluxe Ocean View Room">
                     </div>
                     <div class="room-details">
                         <h4>Deluxe Ocean View</h4>
@@ -876,7 +876,7 @@
                 
                 <div class="room-card" onclick="openRoomModal('deluxe-garden')">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Garden View Room">
+                        <img src="images/rooms/deluxe-room-2.jpg" alt="Deluxe Garden View Room">
                     </div>
                     <div class="room-details">
                         <h4>Deluxe Garden View</h4>
@@ -905,7 +905,7 @@
             <div class="room-grid">
                 <div class="room-card" onclick="openRoomModal('presidential')">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Presidential Suite">
+                        <img src="images/rooms/suite-room.jpg" alt="Presidential Suite">
                     </div>
                     <div class="room-details">
                         <h4>Presidential Suite</h4>
@@ -928,7 +928,7 @@
                 
                 <div class="room-card" onclick="openRoomModal('honeymoon')">
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Honeymoon Suite">
+                        <img src="images/rooms/deluxe-room-1.jpg" alt="Honeymoon Suite">
                     </div>
                     <div class="room-details">
                         <h4>Honeymoon Suite</h4>
@@ -1211,7 +1211,7 @@
                 title: 'Deluxe Ocean View',
                 subtitle: 'Spacious 350 sq ft room with panoramic ocean views and modern amenities',
                 price: '₹8,500',
-                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                image: 'images/rooms/deluxe-room-1.jpg',
                 features: [
                     'King-size bed with premium linens',
                     'Private balcony with ocean view',
@@ -1237,7 +1237,7 @@
                 title: 'Deluxe Garden View',
                 subtitle: 'Comfortable 320 sq ft room overlooking lush tropical gardens',
                 price: '₹7,200',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                image: 'images/rooms/deluxe-room-2.jpg',
                 features: [
                     'Queen-size bed with luxury bedding',
                     'Garden view balcony',
@@ -1263,7 +1263,7 @@
                 title: 'Presidential Suite',
                 subtitle: 'Magnificent 800 sq ft suite with separate living area and premium ocean views',
                 price: '₹18,000',
-                image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                image: 'images/rooms/suite-room.jpg',
                 features: [
                     'Master bedroom with king-size bed',
                     'Separate living room with sofa',
@@ -1289,7 +1289,7 @@
                 title: 'Honeymoon Suite',
                 subtitle: 'Romantic 600 sq ft suite perfect for couples with special amenities',
                 price: '₹15,500',
-                image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                image: 'images/rooms/deluxe-room-1.jpg',
                 features: [
                     'King-size canopy bed',
                     'Romantic decor and lighting',
