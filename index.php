@@ -1027,15 +1027,107 @@
             $phone = $_POST['phone'];
             $special_requests = $_POST['special_requests'];
             
-            echo "<div style='background: #d4edda; color: #155724; padding: 1rem; margin-top: 2rem; border-radius: 5px; text-align: center;'>";
-            echo "<h3>Booking Confirmation</h3>";
-            echo "<p><strong>Thank you, " . htmlspecialchars($name) . "!</strong></p>";
-            echo "<p>Your booking request has been received. We will contact you at " . htmlspecialchars($email) . " within 24 hours to confirm your reservation.</p>";
-            echo "<p><strong>Booking Details:</strong></p>";
-            echo "<p>Check-in: " . htmlspecialchars($checkin) . " | Check-out: " . htmlspecialchars($checkout) . "</p>";
-            echo "<p>Guests: " . htmlspecialchars($guests) . " | Room: " . htmlspecialchars($room_type) . "</p>";
-            echo "<p><strong>Reference Number:</strong> AK" . date('Ymd') . rand(1000, 9999) . "</p>";
-            echo "</div>";
+            // Generate reference number
+            $reference_number = "AK" . date('Ymd') . rand(1000, 9999);
+            
+            // Room type display names
+            $room_names = [
+                'deluxe_ocean' => 'Deluxe Ocean View',
+                'deluxe_garden' => 'Deluxe Garden View',
+                'presidential' => 'Presidential Suite',
+                'honeymoon' => 'Honeymoon Suite'
+            ];
+            $room_display_name = isset($room_names[$room_type]) ? $room_names[$room_type] : $room_type;
+            
+            // Email content for guest
+            $guest_subject = "Booking Confirmation - Aura Kovalam (Ref: $reference_number)";
+            $guest_message = "
+Dear " . htmlspecialchars($name) . ",
+
+Thank you for choosing Aura Kovalam for your stay!
+
+BOOKING CONFIRMATION
+Reference Number: $reference_number
+
+BOOKING DETAILS:
+Check-in Date: " . htmlspecialchars($checkin) . "
+Check-out Date: " . htmlspecialchars($checkout) . "
+Number of Guests: " . htmlspecialchars($guests) . "
+Room Type: $room_display_name
+Phone: " . htmlspecialchars($phone) . "
+
+SPECIAL REQUESTS:
+" . (empty($special_requests) ? "None" : htmlspecialchars($special_requests)) . "
+
+Our reservations team will contact you within 24 hours to confirm your booking and provide payment details.
+
+If you have any questions, please don't hesitate to contact us:
+Phone: +91 471 248 0101
+Email: reservations@aurakovalam.com
+
+We look forward to welcoming you to Aura Kovalam!
+
+Best regards,
+The Aura Kovalam Team
+Lighthouse Beach Road, Kovalam, Kerala 695527
+            ";
+            
+            // Email content for hotel
+            $hotel_subject = "New Booking Request - $reference_number";
+            $hotel_message = "
+NEW BOOKING REQUEST RECEIVED
+
+Reference Number: $reference_number
+Date/Time: " . date('Y-m-d H:i:s') . "
+
+GUEST INFORMATION:
+Name: " . htmlspecialchars($name) . "
+Email: " . htmlspecialchars($email) . "
+Phone: " . htmlspecialchars($phone) . "
+
+BOOKING DETAILS:
+Check-in: " . htmlspecialchars($checkin) . "
+Check-out: " . htmlspecialchars($checkout) . "
+Guests: " . htmlspecialchars($guests) . "
+Room Type: $room_display_name
+
+SPECIAL REQUESTS:
+" . (empty($special_requests) ? "None" : htmlspecialchars($special_requests)) . "
+
+Please follow up with the guest within 24 hours.
+            ";
+            
+            // Email headers
+            $headers = "From: reservations@aurakovalam.com\r\n";
+            $headers .= "Reply-To: reservations@aurakovalam.com\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            
+            // Send emails
+            $guest_email_sent = mail($email, $guest_subject, $guest_message, $headers);
+            $hotel_email_sent = mail("reservations@aurakovalam.com", $hotel_subject, $hotel_message, $headers);
+            
+            // Display confirmation message
+            if ($guest_email_sent) {
+                echo "<div style='background: #d4edda; color: #155724; padding: 1rem; margin-top: 2rem; border-radius: 5px; text-align: center;'>";
+                echo "<h3>Booking Confirmation</h3>";
+                echo "<p><strong>Thank you, " . htmlspecialchars($name) . "!</strong></p>";
+                echo "<p>Your booking request has been received and a confirmation email has been sent to " . htmlspecialchars($email) . ".</p>";
+                echo "<p>We will contact you within 24 hours to confirm your reservation.</p>";
+                echo "<p><strong>Booking Details:</strong></p>";
+                echo "<p>Check-in: " . htmlspecialchars($checkin) . " | Check-out: " . htmlspecialchars($checkout) . "</p>";
+                echo "<p>Guests: " . htmlspecialchars($guests) . " | Room: $room_display_name</p>";
+                echo "<p><strong>Reference Number:</strong> $reference_number</p>";
+                echo "<p><em>Please save this reference number for your records.</em></p>";
+                echo "</div>";
+            } else {
+                echo "<div style='background: #f8d7da; color: #721c24; padding: 1rem; margin-top: 2rem; border-radius: 5px; text-align: center;'>";
+                echo "<h3>Booking Received</h3>";
+                echo "<p><strong>Thank you, " . htmlspecialchars($name) . "!</strong></p>";
+                echo "<p>Your booking request has been received successfully.</p>";
+                echo "<p><strong>Reference Number:</strong> $reference_number</p>";
+                echo "<p><em>Note: There was an issue sending the confirmation email, but your booking has been recorded. We will contact you directly at " . htmlspecialchars($email) . " within 24 hours.</em></p>";
+                echo "</div>";
+            }
         }
         ?>
     </section>
