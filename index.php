@@ -402,10 +402,12 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            cursor: pointer;
         }
         
         .room-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
         .room-image {
@@ -436,6 +438,7 @@
         .room-details h4 {
             color: #333;
             margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
         
         .room-features {
@@ -446,12 +449,253 @@
         .room-features li {
             padding: 0.25rem 0;
             color: #666;
+            font-size: 0.9rem;
         }
         
         .room-features li:before {
             content: "✓ ";
             color: #d4af37;
             font-weight: bold;
+        }
+        
+        .room-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .price-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37;
+        }
+        
+        .price-period {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .view-details-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .view-details-btn:hover {
+            background: #d4af37;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            position: relative;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: background 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        
+        .modal-body {
+            padding: 0 2rem 2rem;
+        }
+        
+        .modal-room-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-room-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-price-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .modal-price-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-price-period {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-price-note {
+            font-size: 0.9rem;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .modal-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-features-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .modal-features-section h4 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .modal-features-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .modal-features-list li {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .modal-features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .modal-features-list li:before {
+            content: "✓ ";
+            color: #d4af37;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .modal-book-btn {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .modal-book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .modal-contact-btn {
+            background: transparent;
+            color: #333;
+            border: 2px solid #333;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-contact-btn:hover {
+            background: #333;
+            color: white;
         }
         
         /* Booking Form */
@@ -607,7 +851,7 @@
         <div class="room-type">
             <h3>Deluxe Rooms</h3>
             <div class="room-grid">
-                <div class="room-card">
+                <div class="room-card" onclick="openRoomModal('deluxe-ocean')">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Ocean View Room">
                     </div>
@@ -619,13 +863,18 @@
                             <li>Private balcony with ocean view</li>
                             <li>Air conditioning & ceiling fan</li>
                             <li>Mini-bar and coffee maker</li>
-                            <li>Free Wi-Fi and flat-screen TV</li>
-                            <li>Marble bathroom with rain shower</li>
                         </ul>
+                        <div class="room-price">
+                            <div class="price-info">
+                                <div class="price-amount">₹8,500</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="room-card">
+                <div class="room-card" onclick="openRoomModal('deluxe-garden')">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Garden View Room">
                     </div>
@@ -637,9 +886,14 @@
                             <li>Garden view balcony</li>
                             <li>Climate control system</li>
                             <li>In-room safe and mini-bar</li>
-                            <li>Complimentary Wi-Fi</li>
-                            <li>Modern bathroom amenities</li>
                         </ul>
+                        <div class="room-price">
+                            <div class="price-info">
+                                <div class="price-amount">₹7,200</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -649,7 +903,7 @@
         <div class="room-type">
             <h3>Luxury Suites</h3>
             <div class="room-grid">
-                <div class="room-card">
+                <div class="room-card" onclick="openRoomModal('presidential')">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Presidential Suite">
                     </div>
@@ -661,13 +915,18 @@
                             <li>Separate living room with sofa</li>
                             <li>Large private terrace</li>
                             <li>Kitchenette with dining area</li>
-                            <li>Premium bathroom with bathtub</li>
-                            <li>Personal butler service</li>
                         </ul>
+                        <div class="room-price">
+                            <div class="price-info">
+                                <div class="price-amount">₹18,000</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="room-card">
+                <div class="room-card" onclick="openRoomModal('honeymoon')">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Honeymoon Suite">
                     </div>
@@ -679,9 +938,14 @@
                             <li>Romantic decor and lighting</li>
                             <li>Private jacuzzi on balcony</li>
                             <li>Champagne and flowers on arrival</li>
-                            <li>Room service dining</li>
-                            <li>Couple's spa treatments available</li>
                         </ul>
+                        <div class="room-price">
+                            <div class="price-info">
+                                <div class="price-amount">₹15,500</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -818,6 +1082,42 @@
         </div>
     </section>
 
+    <!-- Room Detail Modals -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="modalHeroImage" class="modal-hero-image" src="" alt="">
+                <button class="modal-close" onclick="closeRoomModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modalRoomTitle" class="modal-room-title"></h2>
+                <p id="modalRoomSubtitle" class="modal-room-subtitle"></p>
+                
+                <div class="modal-price-section">
+                    <div id="modalPriceAmount" class="modal-price-amount"></div>
+                    <div class="modal-price-period">per night</div>
+                    <div class="modal-price-note">*Prices may vary based on season and availability</div>
+                </div>
+                
+                <div class="modal-features-grid">
+                    <div class="modal-features-section">
+                        <h4>Room Features</h4>
+                        <ul id="modalRoomFeatures" class="modal-features-list"></ul>
+                    </div>
+                    <div class="modal-features-section">
+                        <h4>Amenities</h4>
+                        <ul id="modalAmenities" class="modal-features-list"></ul>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="#booking" class="modal-book-btn" onclick="closeRoomModal()">Book This Room</a>
+                    <button class="modal-contact-btn" onclick="closeRoomModal(); document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Aura Kovalam. All rights reserved. | Experience luxury by the sea.</p>
@@ -903,6 +1203,171 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
+        });
+
+        // Room data
+        const roomData = {
+            'deluxe-ocean': {
+                title: 'Deluxe Ocean View',
+                subtitle: 'Spacious 350 sq ft room with panoramic ocean views and modern amenities',
+                price: '₹8,500',
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                features: [
+                    'King-size bed with premium linens',
+                    'Private balcony with ocean view',
+                    'Air conditioning & ceiling fan',
+                    'Mini-bar and coffee maker',
+                    'Free Wi-Fi and flat-screen TV',
+                    'Marble bathroom with rain shower',
+                    'Room service available 24/7',
+                    'Daily housekeeping service'
+                ],
+                amenities: [
+                    'Complimentary breakfast',
+                    'Beach access',
+                    'Swimming pool access',
+                    'Fitness center',
+                    'Concierge service',
+                    'Laundry service',
+                    'Airport transfer (on request)',
+                    'Parking facilities'
+                ]
+            },
+            'deluxe-garden': {
+                title: 'Deluxe Garden View',
+                subtitle: 'Comfortable 320 sq ft room overlooking lush tropical gardens',
+                price: '₹7,200',
+                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                features: [
+                    'Queen-size bed with luxury bedding',
+                    'Garden view balcony',
+                    'Climate control system',
+                    'In-room safe and mini-bar',
+                    'Complimentary Wi-Fi',
+                    'Modern bathroom amenities',
+                    'Work desk and seating area',
+                    'Daily turndown service'
+                ],
+                amenities: [
+                    'Complimentary breakfast',
+                    'Garden access',
+                    'Swimming pool access',
+                    'Spa services',
+                    'Room service',
+                    'Laundry service',
+                    'Business center access',
+                    'Parking facilities'
+                ]
+            },
+            'presidential': {
+                title: 'Presidential Suite',
+                subtitle: 'Magnificent 800 sq ft suite with separate living area and premium ocean views',
+                price: '₹18,000',
+                image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                features: [
+                    'Master bedroom with king-size bed',
+                    'Separate living room with sofa',
+                    'Large private terrace',
+                    'Kitchenette with dining area',
+                    'Premium bathroom with bathtub',
+                    'Personal butler service',
+                    'Walk-in closet',
+                    'Premium entertainment system'
+                ],
+                amenities: [
+                    'Complimentary gourmet breakfast',
+                    'Private beach access',
+                    'Exclusive pool area',
+                    'Personal concierge',
+                    'In-room spa treatments',
+                    'Private dining service',
+                    'Limousine service',
+                    'VIP check-in/check-out'
+                ]
+            },
+            'honeymoon': {
+                title: 'Honeymoon Suite',
+                subtitle: 'Romantic 600 sq ft suite perfect for couples with special amenities',
+                price: '₹15,500',
+                image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                features: [
+                    'King-size canopy bed',
+                    'Romantic decor and lighting',
+                    'Private jacuzzi on balcony',
+                    'Champagne and flowers on arrival',
+                    'Room service dining',
+                    "Couple's spa treatments available",
+                    'Romantic bathroom with dual vanity',
+                    'Premium sound system'
+                ],
+                amenities: [
+                    'Romantic candlelit dinner',
+                    'Couples massage',
+                    'Private sunset cruise',
+                    'Champagne service',
+                    'Flower arrangements',
+                    'Photography session',
+                    'Special honeymoon packages',
+                    'Late check-out privilege'
+                ]
+            }
+        };
+
+        // Function to open room modal
+        function openRoomModal(roomType) {
+            const modal = document.getElementById('roomModal');
+            const room = roomData[roomType];
+            
+            if (room) {
+                document.getElementById('modalRoomTitle').textContent = room.title;
+                document.getElementById('modalRoomSubtitle').textContent = room.subtitle;
+                document.getElementById('modalPriceAmount').textContent = room.price;
+                document.getElementById('modalHeroImage').src = room.image;
+                document.getElementById('modalHeroImage').alt = room.title;
+                
+                // Populate features
+                const featuresContainer = document.getElementById('modalRoomFeatures');
+                featuresContainer.innerHTML = '';
+                room.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresContainer.appendChild(li);
+                });
+                
+                // Populate amenities
+                const amenitiesContainer = document.getElementById('modalAmenities');
+                amenitiesContainer.innerHTML = '';
+                room.amenities.forEach(amenity => {
+                    const li = document.createElement('li');
+                    li.textContent = amenity;
+                    amenitiesContainer.appendChild(li);
+                });
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Function to close room modal
+        function closeRoomModal() {
+            const modal = document.getElementById('roomModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('roomModal');
+            if (event.target == modal) {
+                closeRoomModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeRoomModal();
+            }
         });
     </script>
 </body>
