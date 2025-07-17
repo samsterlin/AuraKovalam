@@ -174,12 +174,22 @@
         .room-image {
             width: 100%;
             height: 250px;
-            background: linear-gradient(45deg, #007bff, #0056b3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .room-card:hover .room-image img {
+            transform: scale(1.05);
         }
         
         .room-details {
@@ -353,7 +363,9 @@
             <h3>Deluxe Rooms</h3>
             <div class="room-grid">
                 <div class="room-card">
-                    <div class="room-image">Deluxe Ocean View</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Ocean View Room">
+                    </div>
                     <div class="room-details">
                         <h4>Deluxe Ocean View</h4>
                         <p>Spacious 350 sq ft room with panoramic ocean views and modern amenities.</p>
@@ -369,7 +381,9 @@
                 </div>
                 
                 <div class="room-card">
-                    <div class="room-image">Deluxe Garden View</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Garden View Room">
+                    </div>
                     <div class="room-details">
                         <h4>Deluxe Garden View</h4>
                         <p>Comfortable 320 sq ft room overlooking lush tropical gardens.</p>
@@ -391,7 +405,9 @@
             <h3>Luxury Suites</h3>
             <div class="room-grid">
                 <div class="room-card">
-                    <div class="room-image">Presidential Suite</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Presidential Suite">
+                    </div>
                     <div class="room-details">
                         <h4>Presidential Suite</h4>
                         <p>Magnificent 800 sq ft suite with separate living area and premium ocean views.</p>
@@ -407,7 +423,9 @@
                 </div>
                 
                 <div class="room-card">
-                    <div class="room-image">Honeymoon Suite</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Honeymoon Suite">
+                    </div>
                     <div class="room-details">
                         <h4>Honeymoon Suite</h4>
                         <p>Romantic 600 sq ft suite perfect for couples with special amenities.</p>
