@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura Kovalam - Luxury Rooms & Suites</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,20 +15,34 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
         
         /* Header */
         header {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         
         nav {
@@ -39,67 +55,288 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
             color: #d4af37;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: #d4af37;
+            transition: width 0.3s ease;
         }
         
         .nav-links a:hover {
             color: #d4af37;
         }
         
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iODAwIiBmaWxsPSIjMDA3N2JlIi8+Cjx0ZXh0IHg9IjYwMCIgeT0iNDAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BdXJhIEtvdmFsYW0gLSBIZXJvIEltYWdlPC90ZXh0Pgo8L3N2Zz4=');
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease;
         }
         
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #d4af37;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 0.5s forwards;
         }
         
         .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            font-weight: 300;
+            line-height: 1.8;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 1s forwards;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 1.5s forwards;
         }
         
         .cta-button {
-            background: #d4af37;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
         }
         
         .cta-button:hover {
-            background: #b8941f;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            box-shadow: none;
+        }
+        
+        .cta-button.secondary:hover {
+            background: #d4af37;
+            color: white;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-elements::before {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-elements::after {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 25px;
+            position: relative;
+        }
+        
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 4px;
+            height: 8px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        @keyframes scrollDown {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
         }
         
         /* Sections */
@@ -328,10 +565,18 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="floating-elements"></div>
         <div class="hero-content">
+            <div class="hero-subtitle">Luxury Beach Resort</div>
             <h1>Welcome to Aura Kovalam</h1>
-            <p>Experience luxury and tranquility at Kerala's most beautiful coastal destination. Discover our exquisite deluxe and suite rooms with breathtaking ocean views.</p>
-            <a href="#booking" class="cta-button">Book Your Stay</a>
+            <p>Experience luxury and tranquility at Kerala's most beautiful coastal destination. Discover our exquisite deluxe and suite rooms with breathtaking ocean views and world-class amenities.</p>
+            <div class="cta-buttons">
+                <a href="#booking" class="cta-button">Book Your Stay</a>
+                <a href="#rooms" class="cta-button secondary">Explore Rooms</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
         </div>
     </section>
 
@@ -593,6 +838,52 @@
             });
         });
 
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.feature-card, .room-card');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.8s ease';
+                observer.observe(el);
+            });
+        });
+
         // Set minimum date for check-in to today
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('checkin').setAttribute('min', today);
@@ -603,6 +894,15 @@
             checkinDate.setDate(checkinDate.getDate() + 1);
             const minCheckout = checkinDate.toISOString().split('T')[0];
             document.getElementById('checkout').setAttribute('min', minCheckout);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
